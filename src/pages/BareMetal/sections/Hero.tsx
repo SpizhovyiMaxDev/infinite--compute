@@ -35,12 +35,65 @@ export default function Hero() {
       });
 
       // Buttons Animation
-      const buttons = selector(".btns-container");
-      gsap.from(buttons, {
+      const btnContainer = selector(".btns-container");
+      gsap.from(btnContainer, {
         yPercent: 120,
         autoAlpha: 0,
         duration: 2,
         ease: "power4.out",
+      });
+
+      // Slide up heading animation
+      selector(".slide-up-heading").forEach((el: Element) => {
+        gsap.fromTo(
+          el,
+          {
+            y: 80,
+            autoAlpha: 0,
+            scale: 0.98,
+            filter: "blur(8px)",
+          },
+          {
+            y: 0,
+            autoAlpha: 1,
+            scale: 1,
+            filter: "blur(0px)",
+            duration: 1.4,
+            ease: "power4.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+            },
+          },
+        );
+      });
+
+      // Stats blocks animation
+      gsap.utils.toArray(".box").forEach((el, i) => {
+        gsap.fromTo(
+          el as HTMLElement,
+          {
+            y: 10,
+            autoAlpha: 0,
+            scale: 0.98,
+            filter: "blur(6px)",
+          },
+          {
+            y: 0,
+            autoAlpha: 1,
+            scale: 1,
+            filter: "blur(0px)",
+            duration: 1,
+            ease: "power4.out",
+            delay: i * 0.085,
+            scrollTrigger: {
+              trigger: el as HTMLElement,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+            },
+          },
+        );
       });
     },
     { scope: sectionRef },
@@ -113,7 +166,7 @@ export default function Hero() {
         </div>
 
         <div className="h-full flex items-center  min-h-[70vh]">
-          <h2 className="text-[clamp(1.8rem,5vw,7.2rem)] text-zinc-200 leading-[1.1]">
+          <h2 className="text-[clamp(1.8rem,5vw,7.2rem)] text-zinc-200 leading-[1.1] slide-up-heading">
             Purpose-built infrastructure where energy, cooling, and compute converge to produce
             intelligence at scale.
           </h2>
@@ -123,11 +176,12 @@ export default function Hero() {
           <div className="mt-28">
             <h2
               className="
-            font-medium leading-[1.1]
-            text-[clamp(1.8rem,5vw,7.2rem)]
+              slide-up-heading
+              font-medium leading-[1.1]
+              text-[clamp(1.8rem,5vw,7.2rem)]
             text-zinc-200
-            mb-40
-            "
+              mb-40
+              "
             >
               From 100-GPU prototypes to 100,000-GPU superclusters—deploy the models that define the
               next decade of AI.

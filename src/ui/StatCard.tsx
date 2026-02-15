@@ -7,7 +7,7 @@ type StatCardProps = {
 
 function StatCard({ title, subtitle }: StatCardProps) {
   return (
-    <div className="bg-white border border-zinc-800 p-8 rounded-md relative group transition aspect-square flex flex-col justify-between">
+    <div className="box bg-white border border-zinc-800 p-8 rounded-md relative group transition aspect-square flex flex-col justify-between">
       <div className="absolute top-6 left-6">
         <div className="w-15 h-15 sm:h-[5vw] sm:w-[5vw] bg-slate-950 border border-zinc-700 flex items-center justify-center">
           <HardDrive size={25} className="text-white" />
