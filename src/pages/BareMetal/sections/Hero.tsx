@@ -10,8 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useGSAP(
     () => {
@@ -98,26 +97,89 @@ export default function Hero() {
         );
       });
 
-      // Video scroll sync
-      const video = videoRef.current;
-      if (!video) return;
-      
-      let scrollTimeout: number;
-      
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "bottom bottom",
-        onUpdate: () => {
-          video.play();
-      
-          clearTimeout(scrollTimeout);
-          scrollTimeout = window.setTimeout(() => {
-            video.pause();
-          }, 120); // pause after scroll stops
-        },
-      });
-      
+      // Canvas frame sequence
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+
+      const context = canvas.getContext("2d");
+      if (!context) return;
+
+      const TOTAL_FRAMES = 226;
+      const images: HTMLImageElement[] = [];
+      const frameState = { frame: 0 };
+
+      // Preload frames
+      for (let i = 1; i <= TOTAL_FRAMES; i++) {
+        const img = new Image();
+        img.src = `/frames/frame_${String(i).padStart(4, "0")}.jpg`;
+        images.push(img);
+      }
+
+      // Render function (define first)
+      const render = () => {
+        const img = images[Math.floor(frameState.frame)];
+        if (!img || !img.complete || img.naturalWidth === 0) return;
+
+        const canvasAspect = canvas.width / canvas.height;
+        const imgAspect = img.naturalWidth / img.naturalHeight;
+
+        let drawWidth, drawHeight, offsetX, offsetY;
+
+        if (canvasAspect > imgAspect) {
+          drawWidth = canvas.width;
+          drawHeight = canvas.width / imgAspect;
+          offsetX = 0;
+          offsetY = (canvas.height - drawHeight) / 2;
+        } else {
+          drawWidth = canvas.height * imgAspect;
+          drawHeight = canvas.height;
+          offsetX = (canvas.width - drawWidth) / 2;
+          offsetY = 0;
+        }
+
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+      };
+
+      // Set canvas size function
+      const updateCanvasSize = () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        render();
+      };
+
+      // Set initial size
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      // Handle window resize
+      const handleResize = () => {
+        updateCanvasSize();
+      };
+
+      window.addEventListener("resize", handleResize);
+
+      // Wait for first frame
+      images[0].onload = () => {
+        render();
+
+        gsap.to(frameState, {
+          frame: TOTAL_FRAMES - 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: true,
+          },
+          onUpdate: render,
+        });
+      };
+
+      // Cleanup on unmount
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
     },
     { scope: sectionRef },
   );
@@ -125,14 +187,10 @@ export default function Hero() {
   return (
     <section className="relative w-full text-white overflow-hidden bg-black" ref={sectionRef}>
       <div className="fixed inset-0 z-0">
-      <video
-  ref={videoRef}
-  muted
-  playsInline
-  preload="auto"
-  className="absolute inset-0 w-full h-full object-cover"
-  src="/Manitoba.mov"
-/>  
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
         <div className="absolute z-5 inset-0 bg-blue-950/70" />
       </div>
 
