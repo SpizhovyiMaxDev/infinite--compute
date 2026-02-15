@@ -185,16 +185,13 @@ export default function Hero() {
   );
 
   return (
-    <section className="relative w-full text-white overflow-hidden bg-black" ref={sectionRef}>
-      <div className="fixed inset-0 z-0">
-        <canvas
-          ref={canvasRef}
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute z-5 inset-0 bg-blue-950/70" />
+    <section className="relative w-full text-white bg-black" ref={sectionRef}>
+      <div className="sticky top-0 h-screen w-full">
+        <canvas ref={canvasRef} className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-blue-950/60" />
       </div>
 
-      <div className="mx-auto px-4 sm:px-16 pb-32 relative z-10">
+      <div className="mx-auto mt-[-100vh] px-4 sm:px-16 pb-32 relative z-10">
         <div className="min-h-screen mb-19 flex justify-end flex-col pt-25">
           <div className="mb-auto mt-10">
             <div className="mb-6 flex items-center gap-2 text-sm text-white">
