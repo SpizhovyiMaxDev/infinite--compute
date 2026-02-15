@@ -3,10 +3,10 @@ import StatCard from "../../../ui/StatCard";
 
 export default function Hero() {
   return (
-    <section className="relative w-full bg-black text-white overflow-hidden">
+    <section className="relative w-full bg-black text-white overflow-hidden pb-32">
       <div className="mx-auto px-4 sm:px-16">
-        <div className="min-h-screen py-2 flex justify-end flex-col pt-25">
-          <div className="mb-auto">
+        <div className="min-h-screen mb-19 flex justify-end flex-col pt-25">
+          <div className="mb-auto mt-10">
             <div className="mb-6 flex items-center gap-2 text-sm text-white">
               <span className="h-2 w-2 bg-green-400" />
               Bare Metal
@@ -16,7 +16,6 @@ export default function Hero() {
               font-semibold leading-[1.05]
               text-[clamp(2.5rem,6vw,5.5rem)]
               tracking-tight
-              max-w-5xl
             "
             >
               <span>Where Gigawatts</span>
@@ -65,29 +64,30 @@ export default function Hero() {
 
         
 
-        <div className="h-full flex items-center  min-h-screen">
-          <h2 className="text-[clamp(1.8rem,4.5vw,3.8rem)] text-zinc-200 max-w-6xl">
-          Purpose-built infrastructure where energy, cooling, and compute converge to produce intelligence at scale. 
+        <div className="h-full flex items-center  min-h-[70vh]">
+          <h2 className="text-[clamp(1.8rem,5vw,7.2rem)] text-zinc-200 leading-[1.1]">
+            Purpose-built infrastructure where energy, cooling, and compute converge to produce intelligence at scale. 
           </h2>
         </div>
 
 
-        <div className="min-h-screen h-full"> 
+        <div> 
 
-        <div className="mt-28 max-w-6xl">
+        <div className="mt-28">
           <h2
             className="
             font-medium leading-[1.1]
-            text-[clamp(1.8rem,4.5vw,3.8rem)]
+            text-[clamp(1.8rem,5vw,7.2rem)]
             text-zinc-200
+            mb-40
             "
             >
-            Purpose-built infrastructure where energy, cooling, and compute converge to produce
-            intelligence at scale.
+From 100-GPU prototypes to 100,000-GPU superclusters—deploy the models that define the next decade of AI.
+
           </h2>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           <StatCard title="180 MW" subtitle="Production capacity live" />
           <StatCard title="2.5 GW" subtitle="Secured contracted power" />
           <StatCard title="1.25 PUE" subtitle="Efficiency engineered at scale" />
