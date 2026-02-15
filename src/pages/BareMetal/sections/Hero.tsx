@@ -64,6 +64,14 @@ export default function Hero() {
         </div>
 
         
+
+        <div className="h-full flex items-center  min-h-screen">
+          <h2 className="text-[clamp(1.8rem,4.5vw,3.8rem)] text-zinc-200 max-w-6xl">
+          Purpose-built infrastructure where energy, cooling, and compute converge to produce intelligence at scale. 
+          </h2>
+        </div>
+
+
         <div className="min-h-screen h-full"> 
 
         <div className="mt-28 max-w-6xl">
