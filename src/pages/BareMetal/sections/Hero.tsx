@@ -86,7 +86,7 @@ export default function Hero() {
             filter: "blur(0px)",
             duration: 1,
             ease: "power4.out",
-            delay: i * 0.085,
+            delay: i * 0.1,
             scrollTrigger: {
               trigger: el as HTMLElement,
               start: "top 85%",
@@ -100,8 +100,20 @@ export default function Hero() {
   );
 
   return (
-    <section className="relative w-full bg-black text-white overflow-hidden pb-32" ref={sectionRef}>
-      <div className="mx-auto px-4 sm:px-16">
+    <section className="relative w-full text-white overflow-hidden bg-black" ref={sectionRef}>
+      <div className="fixed inset-0 z-0">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          src="/Manitoba.mov"
+        />
+        <div className="absolute z-5 inset-0 bg-blue-950/40" />
+      </div>
+
+      <div className="mx-auto px-4 sm:px-16 pb-32 relative z-10">
         <div className="min-h-screen mb-19 flex justify-end flex-col pt-25">
           <div className="mb-auto mt-10">
             <div className="mb-6 flex items-center gap-2 text-sm text-white">
