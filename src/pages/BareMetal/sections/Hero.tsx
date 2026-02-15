@@ -10,6 +10,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
 
   useGSAP(
     () => {
@@ -95,6 +97,27 @@ export default function Hero() {
           },
         );
       });
+
+      // Video scroll sync
+      const video = videoRef.current;
+      if (!video) return;
+      
+      let scrollTimeout: number;
+      
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top top",
+        end: "bottom bottom",
+        onUpdate: () => {
+          video.play();
+      
+          clearTimeout(scrollTimeout);
+          scrollTimeout = window.setTimeout(() => {
+            video.pause();
+          }, 120); // pause after scroll stops
+        },
+      });
+      
     },
     { scope: sectionRef },
   );
@@ -102,15 +125,15 @@ export default function Hero() {
   return (
     <section className="relative w-full text-white overflow-hidden bg-black" ref={sectionRef}>
       <div className="fixed inset-0 z-0">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-          src="/Manitoba.mov"
-        />
-        <div className="absolute z-5 inset-0 bg-blue-950/40" />
+      <video
+  ref={videoRef}
+  muted
+  playsInline
+  preload="auto"
+  className="absolute inset-0 w-full h-full object-cover"
+  src="/Manitoba.mov"
+/>  
+        <div className="absolute z-5 inset-0 bg-blue-950/70" />
       </div>
 
       <div className="mx-auto px-4 sm:px-16 pb-32 relative z-10">
@@ -157,7 +180,7 @@ export default function Hero() {
               <p className="text-[clamp(1.25rem,3vw,2.5rem)] font-medium text-zinc-200 tracking-tight">
                 324+ km2
               </p>
-              <p className="text-[clamp(0.80rem,1.2vw,1.1rem)] text-zinc-400">
+              <p className="text-[clamp(0.80rem,1.2vw,1.1rem)] text-zinc-300">
                 Space across the all North America
               </p>
             </div>
@@ -168,12 +191,12 @@ export default function Hero() {
               <p className="text-[clamp(1.25rem,3vw,2.5rem)] font-medium text-zinc-200 tracking-tight">
                 324+ km2
               </p>
-              <p className="text-[clamp(0.80rem,1.2vw,1.1rem)] text-zinc-400">
+              <p className="text-[clamp(0.80rem,1.2vw,1.1rem)] text-zinc-300">
                 Space across the all North America
               </p>
             </div>
 
-            <div className="card w-full sm:flex-1 max-w-[280px] sm:max-w-none aspect-[16/9] bg-zinc-800 rounded-md border border-zinc-700" />
+            <div className="card w-full sm:flex-1 max-w-[280px] sm:max-w-none aspect-video bg-zinc-800 rounded-md border border-zinc-700" />
           </div>
         </div>
 
