@@ -1,9 +1,53 @@
 import { ArrowRight } from "lucide-react";
 import StatCard from "../../../ui/StatCard";
+import { useRef } from "react";
+
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const selector = gsap.utils.selector(sectionRef);
+
+      // Heading load animation
+      const spans = selector(".heading-load span");
+      gsap.from(spans, {
+        yPercent: -120,
+        autoAlpha: 0,
+        duration: 2,
+        ease: "power4.out",
+      });
+
+      // Cards Animation
+      const cards = selector(".card");
+      gsap.from(cards, {
+        yPercent: 120,
+        autoAlpha: 0,
+        duration: 1,
+        ease: "power4.out",
+        stagger: 0.2,
+      });
+
+      // Buttons Animation
+      const buttons = selector(".btns-container");
+      gsap.from(buttons, {
+        yPercent: 120,
+        autoAlpha: 0,
+        duration: 2,
+        ease: "power4.out",
+      });
+    },
+    { scope: sectionRef },
+  );
+
   return (
-    <section className="relative w-full bg-black text-white overflow-hidden pb-32">
+    <section className="relative w-full bg-black text-white overflow-hidden pb-32" ref={sectionRef}>
       <div className="mx-auto px-4 sm:px-16">
         <div className="min-h-screen mb-19 flex justify-end flex-col pt-25">
           <div className="mb-auto mt-10">
@@ -13,17 +57,23 @@ export default function Hero() {
             </div>
             <h1
               className="
+              heading-load
+              overflow-hidden
               font-semibold leading-[1.05]
               text-[clamp(2.5rem,6vw,5.5rem)]
               tracking-tight
-            "
+              "
             >
-              <span>Where Gigawatts</span>
-              <br />
-              <span>Become Intelligence</span>
+              <span className="block overflow-hidden">
+                <span className="block heading-line">Where Gigawatts</span>
+              </span>
+
+              <span className="block overflow-hidden">
+                <span className="block heading-line">Become Intelligence</span>
+              </span>
             </h1>
 
-            <div className="mt-10 flex flex-wrap gap-4 mb-20">
+            <div className="btns-container mt-10 flex flex-wrap gap-4 mb-20">
               <button className="px-6 py-3 bg-zinc-800 text-white rounded-md hover:bg-zinc-700 transition">
                 Secondary
               </button>
@@ -36,7 +86,7 @@ export default function Hero() {
           </div>
 
           <div className="flex flex-col sm:flex-row w-full pb-10 gap-8 sm:gap-20 items-start sm:items-end">
-            <div className="flex-1">
+            <div className="card flex-1">
               <div className="h-2 w-2 bg-green-400 mb-3"></div>
 
               <p className="text-[clamp(1.25rem,3vw,2.5rem)] font-medium text-zinc-200 tracking-tight">
@@ -47,7 +97,7 @@ export default function Hero() {
               </p>
             </div>
 
-            <div className="flex-1">
+            <div className="flex-1 card">
               <div className="h-2 w-2 bg-green-400 mb-3"></div>
 
               <p className="text-[clamp(1.25rem,3vw,2.5rem)] font-medium text-zinc-200 tracking-tight">
@@ -58,43 +108,40 @@ export default function Hero() {
               </p>
             </div>
 
-            <div className="w-full sm:flex-1 max-w-[280px] sm:max-w-none aspect-[16/9] bg-zinc-800 rounded-md border border-zinc-700" />
+            <div className="card w-full sm:flex-1 max-w-[280px] sm:max-w-none aspect-[16/9] bg-zinc-800 rounded-md border border-zinc-700" />
           </div>
         </div>
 
-        
-
         <div className="h-full flex items-center  min-h-[70vh]">
           <h2 className="text-[clamp(1.8rem,5vw,7.2rem)] text-zinc-200 leading-[1.1]">
-            Purpose-built infrastructure where energy, cooling, and compute converge to produce intelligence at scale. 
+            Purpose-built infrastructure where energy, cooling, and compute converge to produce
+            intelligence at scale.
           </h2>
         </div>
 
-
-        <div> 
-
-        <div className="mt-28">
-          <h2
-            className="
+        <div>
+          <div className="mt-28">
+            <h2
+              className="
             font-medium leading-[1.1]
             text-[clamp(1.8rem,5vw,7.2rem)]
             text-zinc-200
             mb-40
             "
             >
-From 100-GPU prototypes to 100,000-GPU superclusters—deploy the models that define the next decade of AI.
+              From 100-GPU prototypes to 100,000-GPU superclusters—deploy the models that define the
+              next decade of AI.
+            </h2>
+          </div>
 
-          </h2>
-        </div>
-
-        <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          <StatCard title="180 MW" subtitle="Production capacity live" />
-          <StatCard title="2.5 GW" subtitle="Secured contracted power" />
-          <StatCard title="1.25 PUE" subtitle="Efficiency engineered at scale" />
-          <StatCard title="99.99%" subtitle="Uptime service-level agreement" />
+          <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <StatCard title="180 MW" subtitle="Production capacity live" />
+            <StatCard title="2.5 GW" subtitle="Secured contracted power" />
+            <StatCard title="1.25 PUE" subtitle="Efficiency engineered at scale" />
+            <StatCard title="99.99%" subtitle="Uptime service-level agreement" />
+          </div>
         </div>
       </div>
-            </div>
     </section>
   );
 }
