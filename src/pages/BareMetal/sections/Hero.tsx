@@ -185,20 +185,22 @@ export default function Hero() {
   );
 
   return (
-    <section className="relative w-full text-white bg-black" ref={sectionRef}>
-      <div className="sticky top-0 h-screen w-full">
+    <section className="relative w-full text-white bg-black" ref={sectionRef} aria-labelledby="hero-heading">
+      <div className="sticky top-0 h-screen w-full" aria-hidden="true">
         <canvas ref={canvasRef} className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-blue-950/60" />
+        <div className="absolute inset-0 bg-blue-950/60" aria-hidden="true" />
       </div>
 
       <div className="mx-auto mt-[-100vh] px-4 sm:px-16 pb-32 relative z-10">
         <div className="min-h-screen mb-19 flex justify-end flex-col pt-25">
           <div className="mb-auto mt-10">
-            <div className="mb-6 flex items-center gap-2 text-sm text-white">
+            <div className="mb-6 flex items-center gap-2 text-sm text-white" data-anim="label">
               <span className="h-2 w-2 bg-green-400" />
               Bare Metal
             </div>
             <h1
+              id="hero-heading"
+              data-anim="headline"
               className="
               heading-load
               overflow-hidden
@@ -217,11 +219,11 @@ export default function Hero() {
             </h1>
 
             <div className="btns-container mt-10 flex flex-wrap gap-4 mb-20">
-              <button className="px-6 py-3 bg-zinc-800 text-white rounded-md hover:bg-zinc-700 transition">
+              <button className="px-6 py-3 bg-zinc-800 text-white rounded-md hover:bg-zinc-700 transition" data-anim="cta">
                 Secondary
               </button>
 
-              <button className="px-6 py-3 bg-green-500 text-black rounded-md hover:bg-green-400 transition flex items-center gap-2">
+              <button className="px-6 py-3 bg-green-500 text-black rounded-md hover:bg-green-400 transition flex items-center gap-2" data-anim="cta">
                 Primary
                 <ArrowRight size={18} />
               </button>
@@ -256,7 +258,7 @@ export default function Hero() {
         </div>
 
         <div className="h-full flex items-center  min-h-[70vh]">
-          <h2 className="text-[clamp(1.8rem,5vw,7.2rem)] text-zinc-200 leading-[1.1] slide-up-heading">
+          <h2 className="text-[clamp(1.8rem,5vw,7.2rem)] text-zinc-200 leading-[1.1] slide-up-heading" data-anim="subtext">
             Purpose-built infrastructure where energy, cooling, and compute converge to produce
             intelligence at scale.
           </h2>
