@@ -44,19 +44,19 @@ function ProductTabs() {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <section aria-labelledby="product-platform-heading">
+    <section aria-labelledby="product-platform-heading" className="bg-surfacePrimaryDark text-textOnSurface px-4 sm:px-16 py-32">
       {/* Intro */}
-      <div>
-        <h2 id="product-platform-heading" data-anim="headline">
+      <div className="max-w-3xl mb-16">
+        <h2 id="product-platform-heading" data-anim="headline" className="font-sans font-medium text-display-xl tracking-tight text-textOnSurface mb-4">
           Your AI Cloud Platform Infrastructure Partner
         </h2>
-        <p data-anim="subtext">
+        <p data-anim="subtext" className="text-body-large text-textOnSurfaceSecondary">
           Full control of your infrastructure and workflow.
         </p>
       </div>
 
       {/* Tab list */}
-      <div role="tablist" aria-label="Product platform tabs">
+      <div role="tablist" aria-label="Product platform tabs" className="flex gap-0 border-b border-borderPrimary/20 mb-12">
         {TABS.map((tab, i) => (
           <button
             key={tab.id}
@@ -65,6 +65,7 @@ function ProductTabs() {
             aria-selected={activeTab === i}
             aria-controls={`panel-${tab.id}`}
             onClick={() => setActiveTab(i)}
+            className={`px-6 py-3 text-body-medium font-sans text-textOnSurfaceSecondary border-b-2 border-transparent hover:text-textOnSurface transition-colors -mb-px ${activeTab === i ? "border-surfaceAccent text-textOnSurface" : ""}`}
           >
             {tab.label}
           </button>
@@ -80,9 +81,10 @@ function ProductTabs() {
             id={`panel-${tab.id}`}
             aria-labelledby={`tab-${tab.id}`}
             data-anim="panel"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-0 rounded-lg overflow-hidden border border-borderPrimary/20"
           >
             {/* Image side */}
-            <div>
+            <div className="relative bg-surfaceTertiaryDark">
               <img
                 src=""
                 alt={tab.imageAlt}
@@ -90,17 +92,18 @@ function ProductTabs() {
                 height={520}
                 loading="lazy"
                 data-anim="panel-image"
+                className="w-full h-full object-cover"
               />
             </div>
 
             {/* Content side */}
-            <div data-anim="panel-content">
-              <span>{tab.category}</span>
-              <h3>{tab.heading}</h3>
-              <p>{tab.body}</p>
+            <div data-anim="panel-content" className="bg-surfaceQuaternaryDark p-8 sm:p-12 flex flex-col justify-between">
+              <span className="section-label mb-2 block">{tab.category}</span>
+              <h3 className="font-sans font-medium text-heading-h3 text-textOnSurface mb-4">{tab.heading}</h3>
+              <p className="text-body-large text-textOnSurfaceSecondary mb-8">{tab.body}</p>
 
               {/* Partner logos */}
-              <ul role="list" aria-label="Partner integrations">
+              <ul role="list" aria-label="Partner integrations" className="flex flex-wrap gap-4 mb-8">
                 {Array.from({ length: 6 }).map((_, j) => (
                   <li key={j}>
                     <img
@@ -108,13 +111,14 @@ function ProductTabs() {
                       alt={`Partner logo ${j + 1}`}
                       width={80}
                       height={32}
+                      className="opacity-60 hover:opacity-100 transition-opacity"
                     />
                   </li>
                 ))}
               </ul>
 
               {/* Pagination */}
-              <div aria-label="Tab position">
+              <div aria-label="Tab position" className="flex items-center gap-2 text-body-small text-textOnSurfaceSecondary mt-auto">
                 <span aria-current="true">
                   {String(activeTab + 1).padStart(2, "0")}
                 </span>
@@ -122,7 +126,7 @@ function ProductTabs() {
                 <span>{String(TABS.length).padStart(2, "0")}</span>
               </div>
 
-              <a href={tab.ctaHref} data-anim="cta">
+              <a href={tab.ctaHref} data-anim="cta" className="btn-primary inline-block mt-6">
                 Learn more
               </a>
             </div>
