@@ -185,29 +185,23 @@ export default function Hero() {
   );
 
   return (
-    <section className="relative w-full text-white bg-black" ref={sectionRef} aria-labelledby="hero-heading">
+    <section className="relative w-full min-h-screen bg-surfacePrimaryDark text-textOnSurface" ref={sectionRef} aria-labelledby="hero-heading">
       <div className="sticky top-0 h-screen w-full" aria-hidden="true">
         <canvas ref={canvasRef} className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-blue-950/60" aria-hidden="true" />
+        <div className="absolute inset-0 bg-surfacePrimaryDark/60" aria-hidden="true" />
       </div>
 
       <div className="mx-auto mt-[-100vh] px-4 sm:px-16 pb-32 relative z-10">
         <div className="min-h-screen mb-19 flex justify-end flex-col pt-25">
           <div className="mb-auto mt-10">
-            <div className="mb-6 flex items-center gap-2 text-sm text-white" data-anim="label">
-              <span className="h-2 w-2 bg-green-400" />
+            <div className="section-label flex items-center gap-2 text-body-small mb-6" data-anim="label">
+              <span className="inline-block h-2 w-2 rounded-full bg-surfaceAccent" />
               Bare Metal
             </div>
             <h1
               id="hero-heading"
               data-anim="headline"
-              className="
-              heading-load
-              overflow-hidden
-              font-semibold leading-[1.05]
-              text-[clamp(2.5rem,6vw,5.5rem)]
-              tracking-tight
-              "
+              className="heading-load overflow-hidden font-sans font-medium text-display-xl tracking-tight text-textOnSurface leading-[1.05]"
             >
               <span className="block overflow-hidden">
                 <span className="block heading-line">Where Gigawatts</span>
@@ -218,12 +212,12 @@ export default function Hero() {
               </span>
             </h1>
 
-            <div className="btns-container mt-10 flex flex-wrap gap-4 mb-20">
-              <button className="px-6 py-3 bg-zinc-800 text-white rounded-md hover:bg-zinc-700 transition" data-anim="cta">
+            <div className="btns-container flex flex-wrap gap-4 mt-10 mb-20">
+              <button className="btn-secondary inline-flex items-center gap-2" data-anim="cta">
                 Secondary
               </button>
 
-              <button className="px-6 py-3 bg-green-500 text-black rounded-md hover:bg-green-400 transition flex items-center gap-2" data-anim="cta">
+              <button className="btn-primary inline-flex items-center gap-2" data-anim="cta">
                 Primary
                 <ArrowRight size={18} />
               </button>
@@ -232,33 +226,33 @@ export default function Hero() {
 
           <div className="flex flex-col sm:flex-row w-full pb-10 gap-8 sm:gap-20 items-start sm:items-end">
             <div className="card flex-1">
-              <div className="h-2 w-2 bg-green-400 mb-3"></div>
+              <div className="inline-block h-2 w-2 rounded-full bg-surfaceAccent mb-3" />
 
-              <p className="text-[clamp(1.25rem,3vw,2.5rem)] font-medium text-zinc-200 tracking-tight">
+              <p className="font-sans font-medium text-heading-h3 text-textOnSurface tracking-tight">
                 324+ km2
               </p>
-              <p className="text-[clamp(0.80rem,1.2vw,1.1rem)] text-zinc-300">
+              <p className="text-body-small text-textOnSurfaceSecondary">
                 Space across the all North America
               </p>
             </div>
 
             <div className="flex-1 card">
-              <div className="h-2 w-2 bg-green-400 mb-3"></div>
+              <div className="inline-block h-2 w-2 rounded-full bg-surfaceAccent mb-3" />
 
-              <p className="text-[clamp(1.25rem,3vw,2.5rem)] font-medium text-zinc-200 tracking-tight">
+              <p className="font-sans font-medium text-heading-h3 text-textOnSurface tracking-tight">
                 324+ km2
               </p>
-              <p className="text-[clamp(0.80rem,1.2vw,1.1rem)] text-zinc-300">
+              <p className="text-body-small text-textOnSurfaceSecondary">
                 Space across the all North America
               </p>
             </div>
 
-            <div className="card w-full sm:flex-1 max-w-[280px] sm:max-w-none aspect-video bg-zinc-800 rounded-md border border-zinc-700" />
+            <div className="card w-full sm:flex-1 max-w-[280px] sm:max-w-none aspect-video bg-surfaceTertiaryDark rounded-md border border-borderPrimary" />
           </div>
         </div>
 
-        <div className="h-full flex items-center  min-h-[70vh]">
-          <h2 className="text-[clamp(1.8rem,5vw,7.2rem)] text-zinc-200 leading-[1.1] slide-up-heading" data-anim="subtext">
+        <div className="h-full flex items-center min-h-[70vh]">
+          <h2 className="font-sans text-heading-h2 text-textOnSurface leading-[1.1] slide-up-heading" data-anim="subtext">
             Purpose-built infrastructure where energy, cooling, and compute converge to produce
             intelligence at scale.
           </h2>
@@ -266,25 +260,17 @@ export default function Hero() {
 
         <div>
           <div className="mt-28">
-            <h2
-              className="
-              slide-up-heading
-              font-medium leading-[1.1]
-              text-[clamp(1.8rem,5vw,7.2rem)]
-            text-zinc-200
-              mb-40
-              "
-            >
+            <h2 className="slide-up-heading font-sans font-medium text-heading-h2 text-textOnSurface leading-[1.1] mb-40">
               From 100-GPU prototypes to 100,000-GPU superclusters—deploy the models that define the
               next decade of AI.
             </h2>
           </div>
 
           <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            <StatCard title="180 MW" subtitle="Production capacity live" />
-            <StatCard title="2.5 GW" subtitle="Secured contracted power" />
-            <StatCard title="1.25 PUE" subtitle="Efficiency engineered at scale" />
-            <StatCard title="99.99%" subtitle="Uptime service-level agreement" />
+            <StatCard title="180 MW" subtitle="Production capacity live" classNameTitle="font-sans font-medium text-heading-h3 text-textOnSurface tracking-tight" classNameSubtitle="mt-2 text-body-small text-textOnSurfaceSecondary" />
+            <StatCard title="2.5 GW" subtitle="Secured contracted power" classNameTitle="font-sans font-medium text-heading-h3 text-textOnSurface tracking-tight" classNameSubtitle="mt-2 text-body-small text-textOnSurfaceSecondary" />
+            <StatCard title="1.25 PUE" subtitle="Efficiency engineered at scale" classNameTitle="font-sans font-medium text-heading-h3 text-textOnSurface tracking-tight" classNameSubtitle="mt-2 text-body-small text-textOnSurfaceSecondary" />
+            <StatCard title="99.99%" subtitle="Uptime service-level agreement" classNameTitle="font-sans font-medium text-heading-h3 text-textOnSurface tracking-tight" classNameSubtitle="mt-2 text-body-small text-textOnSurfaceSecondary" />
           </div>
         </div>
       </div>

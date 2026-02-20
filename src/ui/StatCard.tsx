@@ -3,9 +3,11 @@ import { HardDrive } from "lucide-react";
 type StatCardProps = {
   title: string;
   subtitle: string;
+  classNameTitle?: string;
+  classNameSubtitle?: string;
 };
 
-function StatCard({ title, subtitle }: StatCardProps) {
+function StatCard({ title, subtitle, classNameTitle, classNameSubtitle }: StatCardProps) {
   return (
     <div className="box bg-white border border-zinc-800 p-8 rounded-md relative group transition aspect-square flex flex-col justify-between">
       <div className="absolute top-6 left-6">
@@ -15,8 +17,8 @@ function StatCard({ title, subtitle }: StatCardProps) {
       </div>
 
       <div className="mt-auto">
-        <h3 className="text-[clamp(1.5rem,2vw,2.4rem)] font-semibold text-slate-950">{title}</h3>
-        <p className="mt-2 text-sm md:text-md text-slate-900">{subtitle}</p>
+        <h3 className={classNameTitle ?? "text-[clamp(1.5rem,2vw,2.4rem)] font-semibold text-slate-950"}>{title}</h3>
+        <p className={classNameSubtitle ?? "mt-2 text-sm md:text-md text-slate-900"}>{subtitle}</p>
       </div>
     </div>
   );
