@@ -1,1 +1,38 @@
 @import "tailwindcss";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: #00002B;
+    color: #FFFCF8;
+  }
+}
+
+@layer components {
+  .section-label {
+    color: #13FF89;
+    font-size: 0.875rem;
+    line-height: 1.3;
+  }
+
+  .btn-primary {
+    background: #13FF89;
+    color: #00002B;
+    border-radius: 6px;
+    padding: 12px 24px;
+  }
+
+  .btn-secondary {
+    border: 1px solid #E8E8E8;
+    color: #FFFCF8;
+    border-radius: 6px;
+    padding: 12px 24px;
+  }
+}
+
+*:focus-visible {
+  outline: 2px solid #13FF89;
+  outline-offset: 2px;
+}
