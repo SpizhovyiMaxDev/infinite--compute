@@ -9,9 +9,10 @@ function NorthAmericaFootprint() {
   };
 
   return (
-    <section className="py-32">
+    <section className="py-32" aria-labelledby="footprint-heading">
+      <p aria-label="Section label">■ Testimonials</p>
       <div className="px-4 sm:px-16">
-        <h2 className="text-[clamp(1.8rem,8vw,12.2rem)] leading-[1.1] slide-up-heading text-slate-950 mb-160">
+        <h2 id="footprint-heading" className="text-[clamp(1.8rem,8vw,12.2rem)] leading-[1.1] slide-up-heading text-slate-950 mb-160">
           Our North American Footprint
         </h2>
 
@@ -53,6 +54,30 @@ function NorthAmericaFootprint() {
           </FootprintItem>
         </div>
       </div>
+
+      <aside aria-labelledby="global-stats-heading">
+        <h3 id="global-stats-heading">
+          Join millions of humans in 160 countries with us
+        </h3>
+        <dl>
+          <div>
+            <dt>Dollars Earned</dt>
+            <dd data-anim="stat-value" data-value="1.5">$1.5 Gazzilion</dd>
+          </div>
+          <div>
+            <dt>Total transactions</dt>
+            <dd data-anim="stat-value" data-value="890638541">890,638,541</dd>
+          </div>
+          <div>
+            <dt>States Served</dt>
+            <dd data-anim="stat-value" data-value="160">160+</dd>
+          </div>
+        </dl>
+        <nav aria-label="Footprint actions">
+          <a href="#">Learn More</a>
+          <a href="#">Explore Platform</a>
+        </nav>
+      </aside>
     </section>
   );
 }
