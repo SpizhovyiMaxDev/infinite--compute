@@ -53,7 +53,7 @@ const FEATURES: Feature[] = [
 
 function ScaleFeatures() {
   return (
-    <section aria-labelledby="scale-features-heading">
+    <section aria-labelledby="scale-features-heading" className="bg-surfacePage text-textHeadings">
       <h2 id="scale-features-heading" className="sr-only">
         Infrastructure Scale and Control Features
       </h2>
@@ -63,9 +63,10 @@ function ScaleFeatures() {
           key={feature.id}
           aria-labelledby={`feature-heading-${feature.id}`}
           data-anim="feature"
+          className="grid grid-cols-1 lg:grid-cols-2 min-h-[600px] border-t border-borderPrimary first:border-t-0"
         >
           {/* Image side */}
-          <div style={{ order: feature.imageLeft ? 0 : 1 }}>
+          <div className={`relative overflow-hidden bg-surfaceSecondary ${feature.imageLeft ? "order-0" : "order-1"}`}>
             <img
               src={feature.imageSrc}
               alt={feature.imageAlt}
@@ -73,16 +74,17 @@ function ScaleFeatures() {
               height={600}
               loading="lazy"
               data-anim="feature-image"
+              className="w-full h-full object-cover"
             />
-            <p aria-label="Feature category" data-anim="feature-text">
+            <p aria-label="Feature category" data-anim="feature-text" className="section-label absolute bottom-6 left-6">
               {feature.tag}
             </p>
           </div>
 
           {/* Content side */}
-          <div style={{ order: feature.imageLeft ? 1 : 0 }}>
-            <span aria-hidden="true">{/* decorative icon placeholder */}</span>
-            <p data-anim="feature-text">
+          <div className={`flex flex-col justify-center px-8 py-16 sm:px-16 ${feature.imageLeft ? "order-1" : "order-0"}`}>
+            <span aria-hidden="true" className="text-2xl mb-6 block">{/* decorative icon placeholder */}</span>
+            <p data-anim="feature-text" className="text-body-small text-textOnSurfaceSecondary font-mono mb-4">
               <span aria-hidden="true">{feature.counter}</span>
               <span className="sr-only">
                 Feature {feature.counter} of {feature.total}
@@ -92,10 +94,11 @@ function ScaleFeatures() {
             <h3
               id={`feature-heading-${feature.id}`}
               data-anim="feature-text"
+              className="font-sans font-medium text-heading-h3 text-textHeadings mb-4"
             >
               {feature.heading}
             </h3>
-            <p data-anim="feature-text">{feature.body}</p>
+            <p data-anim="feature-text" className="text-body-large text-textBody">{feature.body}</p>
           </div>
         </article>
       ))}
