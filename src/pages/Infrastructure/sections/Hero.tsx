@@ -2,13 +2,10 @@ import { ArrowRight } from "lucide-react";
 import StatCard from "../../../ui/StatCard";
 import { useRef } from "react";
 
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { gsap } from "gsap";
+import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { animateInfrastructureHeroUI } from "../../../lib/animations/uiAnimations";
 import { initCanvasSequence } from "../../../lib/animations/canvasSequence";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -16,16 +13,14 @@ export default function Hero() {
 
   useGSAP(
     () => {
-      const selector = gsap.utils.selector(sectionRef);
+      const section = sectionRef.current;
+      if (!section) return;
 
-      animateInfrastructureHeroUI(selector);
+      animateInfrastructureHeroUI(gsap.utils.selector(section));
 
       const canvas = canvasRef.current;
-      const section = sectionRef.current;
-
-      if (canvas && section) {
-        return initCanvasSequence(canvas, section);
-      }
+      if (!canvas) return;
+      return initCanvasSequence(canvas, section);
     },
     { scope: sectionRef },
   );
