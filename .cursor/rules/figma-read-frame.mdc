@@ -1,0 +1,52 @@
+---
+description: Read a Figma frame and list colors, typography, spacing, and component states
+alwaysApply: false
+---
+
+# Figma Read Frame Template
+
+When the user asks to read a Figma frame (e.g. "Using the Figma MCP, read the frame named '[Frame Name]'"), do the following:
+
+## 1. Resolve the frame
+
+- **Desktop Figma MCP**: Ask the user to select the frame in Figma, or confirm they have the frame selected. The tools use the current selection.
+- **Remote Figma MCP**: You need a link to the frame or layer. Ask for the Figma file URL and (if needed) the node ID of the frame, or a link that includes the node (e.g. `https://www.figma.com/file/...?node-id=...`).
+
+## 2. Call Figma MCP tools
+
+Use these tools to gather full design data:
+
+1. **`get_design_context`** – Structured design representation (layout, components, structure). Use this to identify component states and hierarchy.
+2. **`get_variable_defs`** – Variables and styles used in the selection: **colors**, **spacing**, **typography**. Ask explicitly for "variable names and values" to get tokens.
+3. **`get_metadata`** – Lightweight XML outline (IDs, names, types, position, size). Use for very large frames or to scope further calls.
+
+If the user wants a visual reference, use **`get_screenshot`** for the selection.
+
+## 3. Output format
+
+Summarize the frame in this structure:
+
+### Colors (hex)
+- List every color used in the frame as hex (e.g. `#1a1a2e`, `#16213e`).
+- If variables are used, show both variable name and resolved hex.
+
+### Font sizes (px)
+- List every distinct font size in the frame in pixels (e.g. `12px`, `16px`, `24px`).
+- Note which text layers or components use each size if useful.
+
+### Spacing values (px)
+- List padding, margin, and gap values in pixels (e.g. `8px`, `16px`, `24px`, `32px`).
+- Include spacing from Auto Layout (e.g. item spacing, padding).
+
+### Component states
+- List any component states visible in the frame (e.g. default, hover, pressed, disabled, error).
+- Note which components have variants and how they’re used in this frame.
+
+## 4. Prompting tip
+
+If the MCP returns code instead of variable values, prompt explicitly for variables, for example:
+
+- "Get the variable names and values used in this frame"
+- "List all colors (hex), font sizes (px), and spacing (px) from the variables in this selection"
+
+This helps trigger `get_variable_defs` and keeps the output aligned with the template.

@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import { gsap } from "gsap";
+import { animateToggleHeight } from "../lib/animations/uiAnimations";
 
 interface FootprintItemProps {
   title: string;
@@ -16,21 +16,7 @@ export function FootprintItem({ title, status, isOpen, children, onClick }: Foot
     const el = contentRef.current;
     if (!el) return;
 
-    if (isOpen) {
-      gsap.to(el, {
-        height: el.scrollHeight,
-        opacity: 1,
-        duration: 0.4,
-        ease: "power3.out",
-      });
-    } else {
-      gsap.to(el, {
-        height: 0,
-        opacity: 0,
-        duration: 0.4,
-        ease: "power3.inOut",
-      });
-    }
+    animateToggleHeight(el, isOpen);
   }, [isOpen]);
 
   return (
@@ -40,11 +26,11 @@ export function FootprintItem({ title, status, isOpen, children, onClick }: Foot
           <div className="flex items-center gap-2 sm:gap-4">
             <h3 className="text-xs sm:text-2xl font-medium text-slate-900">{title}</h3>
             <span
-              className={`
-    inline-flex items-center gap-2
-    px-3 py-1 text-xs sm:text-sm rounded
-    bg-slate-100 text-slate-700
-    `}
+              className="
+             inline-flex items-center gap-2
+             px-3 py-1 text-xs sm:text-sm rounded
+           bg-slate-100 text-slate-700
+            "
             >
               <span
                 className={`
